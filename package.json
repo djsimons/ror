@@ -1,0 +1,11 @@
+{
+  "name": "ror",
+  "version": "0.1.0",
+  "description": "Keep-or-replace calculator for an aging car: break-even repair costs from a defender-vs-challenger cost model.",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "serve": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}

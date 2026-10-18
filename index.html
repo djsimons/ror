@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repair or Replace</title>
+  <meta name="description" content="Should you fix your old car or replace it? Enter the repair quote and get your break-even points.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="masthead">
+    <h1>Repair or replace?</h1>
+    <p class="lede">Got a repair quote on an aging car? This works out how long the car has to keep running for the repair to beat buying something else.</p>
+  </header>
+
+  <main class="layout">
+    <section class="describe" aria-labelledby="describe-h">
+      <h2 id="describe-h" class="visually-hidden">Describe your situation</h2>
+      <label for="situation" class="describe-label">Describe your situation</label>
+      <div class="describe-row">
+        <input id="situation" type="text" autocomplete="off"
+               value="My 2012 Corolla has 150k miles and a $2700 repair">
+        <button id="fill" type="button" class="btn btn-primary">Fill in the form</button>
+      </div>
+      <p id="fill-status" class="hint" role="status" aria-live="polite">Picks up the year, make or model, mileage and repair quote. Check the details below.</p>
+    </section>
+
+    <form id="inputs" class="inputs" novalidate>
+      <fieldset>
+        <legend>Your car</legend>
+        <div class="grid">
+          <label class="field">Year
+            <input id="year" type="number" inputmode="numeric" min="1985" max="2030" value="2012">
+          </label>
+          <label class="field">Make and model
+            <input id="carName" type="text" value="Toyota Corolla">
+          </label>
+          <label class="field">Mileage
+            <input id="oldMiles" type="text" inputmode="numeric" value="150,000">
+          </label>
+          <label class="field">Miles you drive per year
+            <input id="annualMiles" type="text" inputmode="numeric" value="12,000">
+          </label>
+          <label class="field">Value if it were running fine
+            <span class="input-prefix"><span>$</span><input id="runningValue" type="text" inputmode="decimal" value="2,200"></span>
+            <span class="hint">Private-party value from KBB or Edmunds, adjusted for any accident history.</span>
+          </label>
+          <label class="field">Reliability reputation
+            <select id="oldTier">
+              <option value="above" selected>Above average</option>
+              <option value="average">Average</option>
+              <option value="below">Below average</option>
+            </select>
+          </label>
+          <label class="field">Fuel economy (mpg)
+            <input id="oldMpg" type="text" inputmode="decimal" value="29">
+          </label>
+          <label class="field">Insurance per year
+            <span class="input-prefix"><span>$</span><input id="oldInsurance" type="text" inputmode="decimal" value="1,000"></span>
+          </label>
+          <label class="field check">
+            <input id="accident" type="checkbox" checked>
+            It has been in a major accident or has a branded title
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The repair</legend>
+        <div class="grid">
+          <label class="field">Repair quote
+            <span class="input-prefix"><span>$</span><input id="repairCost" type="text" inputmode="decimal" value="2,700"></span>
+          </label>
+          <label class="field">What it would sell for unrepaired
+            <span class="input-prefix"><span>$</span><input id="asIsValue" type="text" inputmode="decimal" placeholder="auto"></span>
+            <span class="hint" id="asIsHint">Leave blank to estimate.</span>
+          </label>
+          <label class="field">Years it could realistically last after the repair
+            <input id="remainingYears" type="text" inputmode="numeric" placeholder="auto">
+            <span class="hint" id="remainingHint">Leave blank to estimate from mileage.</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What you'd replace it with</legend>
+        <div class="grid">
+          <label class="field">Price
+            <span class="input-prefix"><span>$</span><input id="newPrice" type="text" inputmode="decimal" value="14,000"></span>
+          </label>
+          <label class="field">Its mileage
+            <input id="newMiles" type="text" inputmode="numeric" value="75,000">
+          </label>
+          <label class="field">Reliability reputation
+            <select id="newTier">
+              <option value="above" selected>Above average</option>
+              <option value="average">Average</option>
+              <option value="below">Below average</option>
+            </select>
+          </label>
+          <label class="field">Fuel economy (mpg)
+            <input id="newMpg" type="text" inputmode="decimal" value="32">
+          </label>
+          <label class="field">Insurance per year
+            <span class="input-prefix"><span>$</span><input id="newInsurance" type="text" inputmode="decimal" value="1,600"></span>
+            <span class="hint">Usually higher: newer car, often full coverage.</span>
+          </label>
+          <label class="field">Years you'd keep it
+            <input id="newHoldYears" type="text" inputmode="numeric" value="5">
+          </label>
+        </div>
+      </fieldset>
+
+      <details class="advanced">
+        <summary>Money, taxes and depreciation</summary>
+        <div class="grid">
+          <label class="field">Gas price per gallon
+            <span class="input-prefix"><span>$</span><input id="fuelPrice" type="text" inputmode="decimal" value="3.00"></span>
+          </label>
+          <label class="field">Sales tax on a car purchase
+            <span class="input-suffix"><input id="salesTax" type="text" inputmode="decimal" value="3"><span>%</span></span>
+            <span class="hint">North Carolina's highway use tax is 3%.</span>
+          </label>
+          <label class="field">Title, tags and fees
+            <span class="input-prefix"><span>$</span><input id="fees" type="text" inputmode="decimal" value="200"></span>
+          </label>
+          <label class="field">Annual vehicle property tax
+            <span class="input-suffix"><input id="propertyTax" type="text" inputmode="decimal" value="1.2"><span>%</span></span>
+            <span class="hint">Set to 0 if your state doesn't tax vehicles yearly.</span>
+          </label>
+          <label class="field">Cost of money
+            <span class="input-suffix"><input id="costOfMoney" type="text" inputmode="decimal" value="5"><span>%</span></span>
+            <span class="hint">Your loan APR if you'd finance; what savings earn if you'd pay cash.</span>
+          </label>
+          <label class="field">Replacement depreciation per year
+            <span class="input-suffix"><input id="newDepreciation" type="text" inputmode="decimal" value="10"><span>%</span></span>
+          </label>
+          <label class="field">Your car's depreciation per year
+            <span class="input-suffix"><input id="oldDepreciation" type="text" inputmode="decimal" value="10"><span>%</span></span>
+          </label>
+        </div>
+      </details>
+
+      <div class="form-actions">
+        <button id="share" type="button" class="btn">Copy link to this scenario</button>
+        <button id="reset" type="button" class="btn btn-quiet">Reset to example</button>
+        <span id="share-status" class="hint" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+
+    <section class="results" aria-labelledby="verdict" aria-live="polite">
+      <div class="ticket">
+        <p class="ticket-car" id="ticket-car"></p>
+        <h2 id="verdict" class="verdict"></h2>
+        <p id="verdict-detail" class="verdict-detail"></p>
+
+        <dl class="lines">
+          <div class="line">
+            <dt>Repair pays for itself after</dt>
+            <dd id="out-payback"></dd>
+          </div>
+          <div class="line">
+            <dt id="out-max-label">Most this repair is worth</dt>
+            <dd id="out-max"></dd>
+          </div>
+          <div class="line">
+            <dt>Keep it while yearly repairs stay under</dt>
+            <dd id="out-threshold"></dd>
+          </div>
+          <div class="line">
+            <dt>Expected repairs next year, besides this one</dt>
+            <dd id="out-expected"></dd>
+          </div>
+        </dl>
+      </div>
+
+      <figure class="chart-block">
+        <figcaption>
+          <h3>Most the repair is worth, by how long the car lasts</h3>
+          <p class="hint">Each bar is the largest repair bill that still beats replacing now, if the car keeps running that many more years.</p>
+        </figcaption>
+        <div class="legend" id="legend"></div>
+        <div class="chart" id="chart"></div>
+        <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+        <details class="table-view">
+          <summary>Show as a table</summary>
+          <table id="year-table"></table>
+        </details>
+      </figure>
+
+      <section class="compare" aria-labelledby="compare-h">
+        <h3 id="compare-h">Cost per year, side by side</h3>
+        <table id="compare-table" class="compare-table"></table>
+        <p class="hint">Keeping is next year's cost for your car after the repair. Replacing is the replacement's average yearly cost over the years you'd own it, including what it loses in value, in today's dollars.</p>
+      </section>
+
+      <aside id="safety" class="safety" hidden>
+        <h3>Check the accident repair first</h3>
+        <p>The math assumes the car is safe. After a major accident, have a shop check for frame or unibody damage and confirm the airbags were replaced. Uneven tire wear, a car that won't hold alignment, or doors and trunk that don't close right are warning signs. If it isn't safe, replace it whatever the numbers say.</p>
+      </aside>
+
+      <p class="fineprint">Estimates, not advice. Future repair costs come from a rough mileage curve, not real failure data for your model. Change any number that you know better. <a href="https://github.com/djsimons/ror#how-it-works">How it works</a></p>
+    </section>
+  </main>
+
+  <script src="js/model.js"></script>
+  <script src="js/parse.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
